@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Gocase by you - Gocase</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet">
+		<link rel="stylesheet" href="owlcarousel/dist/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="owlcarousel/dist/assets/owl.theme.default.min.css">
+		<script src="jquery.min.js"></script>
+		<script src="owlcarousel/dist/owl.carousel.min.js"></script>
+		<script src="jscolor/jscolor.js"></script>
+		<style>
+			@font-face {
+				font-family: 'Averta-Regular';
+				src: url('./fonts/averta-regular-webfont.eot');
+				src: url('./fonts/averta-regular-webfont.eot?#iefix') format('embedded-opentype'),
+						url('./fonts/averta-regular-webfont.woff2') format('woff2'),
+						url('./fonts/averta-regular-webfont.woff') format('woff'),
+						url('./fonts/averta-regular-webfont.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
+
+			@font-face {
+					font-family: 'FeltThat';
+					src: url("./fonts/felt-that.otf") format("opentype");
+			}
+
+
+			html, body {
+				height: 100vh;
+			}
+
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+				outline: 0;
+			}
+
+			#example {
+				width: 100%;
+				height: 100vh;
+				top: 0;
+				left: 0;
+			}
+
+			#feedback {
+				color: darkorange;
+			}
+
+			#dat {
+				user-select: none;
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-Index: 200;
+			}
+
+			#container {
+				width: 100%;
+				height: 100vh;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+			}
+
+			#glFullscreen {
+				width: 100%;
+				min-height: 100vh;
+				position: relative;
+				overflow: hidden;
+				z-index: 0;
+				margin-right: 3px;
+			}
+
+			#customizations {
+				height: 100vh;
+			}
+
+			#customizations ul {
+				list-style: none;
+				width: 100%;
+				min-width: 360px;
+				height: 100vh;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				background: #ffffff;
+				z-index: 1000;
+			}
+
+			#customizations ul li {
+				background: #f7f7f7;
+				padding-bottom: 10px;
+				margin-top: 1.5px;
+				margin-bottom: 1.5px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: center;
+				font-family: 'Averta-Regular';
+				font-size: 13px;
+				letter-spacing: 2px;
+				height: 100%;
+			}	
+			
+			#customizations ul li:first-child {
+				margin-top: 0px;
+			}
+			
+			#customizations ul li:last-child {
+				margin-bottom: 0px;
+			}
+
+			#customizations ul li img {
+				max-width: 80px;
+			}
+
+			img.color {
+				max-width: 1000px !important;
+			}
+
+
+			#customizations ul li img:hover {
+				transform: scale(1.1);
+ 			 	transition: transform 0.2s;
+			}
+
+			#logo {
+				position: absolute;
+				top: -70px;
+				left: 0px;
+				z-index: 1000;
+			}
+			
+			#logo img {
+				width: 300px;
+			}
+
+			#by-name {
+				font-family: 'FeltThat';
+				position: absolute;
+				top: 90px;
+				left: 120px;
+				z-index: 1000;
+				font-size: 40px;
+			}
+
+			#buy-button {
+				text-decoration: none;
+				position: absolute;
+				font-family: 'Averta-Regular';
+				font-size: 15px;
+				width: 220px;
+				height: 50px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color:#e62ba2;
+				color: white;
+				border-radius: 40px;
+				z-index: 1000;
+				font-weight: 900;
+				letter-spacing: 2px;
+				bottom: 120px;
+				margin-left: -110px;
+				left: 50%;
+				cursor: pointer;
+			}
+
+			#buy-button:hover {
+				transform: scale(1.05);
+  			transition: transform 0.5s;
+			}
+
+			.colors {
+				height: 100%;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-evenly;
+				position: relative;
+			}
+
+			.colors-header {
+				font-family: 'Averta-Regular';
+				font-size: 13px;
+				width: 100%;
+				height: 300px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 25px;
+				background: #ffffff;
+			}
+
+			.colors li {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.colors li.color-picker {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+			}
+
+			.colors li.color-picker .custom {
+				width: 90%;
+				height: 100%;
+				height: 50px;
+				color: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+			}
+
+			.custom input, .custom div {
+				border: none;
+				height: 100%;
+				width: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+			}
+
+			.colors .color {
+				height: 150px;
+				width: 150px;
+				border-radius: 50%;
+			}
+
+			#finalize-options {
+				width: 100%;
+				height: 300px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				align-items: center;				
+			}
+
+			#finalize-options i {
+				font-size: 40px;
+				cursor: pointer;
+				color: #e62ba2;
+			}
+
+			.selected {
+				transform: scale(1.1);
+  			transition: transform 0.5s;
+			}
+
+			.mobile-finalize-options {
+				display: none;
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding-top: 0px;
+				width: 50px;
+				background: rgba(0,0,0,0.1);
+				z-index: 1000;
+				border-radius: 0 0 0 3px;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+
+			.mobile-finalize-options i {
+				font-size: 30px;
+				color: #e62ba2;
+				margin: 10px auto;
+				cursor: pointer;
+			}
+
+			#options li:hover, .colors li:hover {
+				background-color:rgba(233,237,154,.4);
+			}
+
+			.custom-name  {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+				height: 60px;
+			}
+
+			.custom-name input {
+				border: none;
+				background: white;
+				padding: 10px 20px;
+				text-align: center;
+			}
+
+			@media (max-width: 1100px) {
+				#container {
+					flex-direction: column;
+				}
+				
+				#buy-button {
+					bottom: 130px;
+				}
+
+				#glFullscreen {
+					margin-top: -100px;
+				}
+
+				.colors .color {
+					height: 100px !important;
+					width: 100px !important;
+					height: 100%;
+				}
+
+				#logo {
+					top: -90px;
+					left: -20px;
+					z-index: 1000;
+				}
+
+				#by-name {
+					top: 70px;
+					left: 100px;
+					z-index: 1000;
+					font-size: 40px;
+				}
+
+				#options, .colors {
+					flex-direction: row !important;
+					height: 150px !important;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+				}
+
+				#options li, .colors li {
+					min-width: 200px ;
+					margin: 0px 3px;
+					height: 100%;
+				}
+
+				.owl-stage, .owl-stage-outer, .owl-item, .active{
+					height: 100% !important;
+				}
+			}
+
+			@media (max-width: 600px) {
+				#options li {
+					margin: 0px 0px;
+				}
+
+				#buy-button {
+					height: 45px;
+					bottom: 130px;
+				}
+
+				#options, .colors {
+					bottom: -10px;
+					left: 0;
+				}
+
+				.colors .color {
+					height: 80px !important;
+					width: 80px !important;
+				}
+
+				#logo {
+					left: -10px;
+					top: -55px
+				}
+
+				#logo img{
+					width: 180px;
+				}
+
+				#by-name {
+					top: 40px;
+					left: 65px;
+					z-index: 1000;
+					font-size: 20px;
+				}
+
+				#options li, .colors li {
+					margin: 0px 0px;
+				}
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<script>
+	
+			function getParameterByName(name, url) {
+						if (!url) url = window.location.href;
+						name = name.replace(/[\[\]]/g, '\\$&');
+						var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+								results = regex.exec(url);
+						if (!results) return null;
+						if (!results[2]) return '';
+						return decodeURIComponent(results[2].replace(/\+/g, ' '));
+				}
+
+				window.onload = function () {
+
+					var byName = getParameterByName('yourname', window.location.href)
+
+					document.querySelector("#by-name").innerHTML = byName || 'Adenilson'
+					
+				}
+
+		</script>
+		<div id="container">
+			<div class="mobile-finalize-options">
+				<i class="material-icons back-btn">
+					arrow_back
+				</i>
+				<i class="material-icons done-btn">
+					favorite
+				</i>
+			</div>
+			<div id="logo">
+				<img src="./images/Gocase-by.svg" alt="">
+			</div>
+			<div id="by-name">
+					Camila
+			</div>
+			<div id="glFullscreen">
+				<canvas id="example"></canvas>
+				<a href="#" id="buy-button">COMPRAR AGORA</a>
+			</div>
+			<div id="customizations">
+				<ul id="options" class="owl-carousel">
+					<li id="back-btn" data-to="back-colors">
+						<img src="./images/MOCHILA-COSTAS.svg" alt="">
+						COSTAS
+					</li>
+					<li id="front-btn" data-to="front-colors">
+						<img src="./images/MOCHILA-FRENTE.svg" alt="">
+						FRENTE
+					</li>
+					<li id="pocket-btn" data-to="pocket-colors">
+						<img src="./images/MOCHILA-BOLSO.svg" alt="">
+						BOLSO
+					</li>
+					<li id="sideways-btn" data-to="sideways-colors">
+						<img src="./images/MOCHILA-LATERAL.svg" alt="">
+						LATERAIS
+					</li>
+					<li id="customizations-btn" data-to="customizations-colors">
+						<img src="./images/customization-font.svg" alt="">
+						CUSTOMIZAÇÃO
+					</li>
+				</ul>
+				
+				<ul class="colors owl-carousel" id="back-colors" style="display:none;">
+					<div class="colors-header">
+						COSTAS
+					</div>
+
+					<li>
+						<div class="color black" data-color="000000" style="background: #000000;"></div>
+					</li>
+					<li>
+						<div class="color pink" data-color="feb2e2" style="background: #feb2e2;"></div>
+					</li>
+
+					<div id="finalize-options">
+						<i class="material-icons back-btn">
+							arrow_back
+						</i>
+						<i class="material-icons done-btn">
+							favorite
+						</i>
+					</div>
+				</ul>
+				<ul class="colors owl-carousel" id="front-colors" style="display:none;">
+					<div class="colors-header">
+						FRENTE
+					</div>
+
+
+					<li>
+						<div class="color black" data-color="efef9b" style="background: #efef9b;"></div>
+					</li>
+					<li>
+						<div class="color pink" data-color="feb2e2" style="background: #feb2e2;"></div>
+					</li>
+					<li>
+						<div class="color blue" data-color="1360ad" style="background: #1360ad;"></div>
+					</li>
+					<li class="color-picker">	
+						<div class="custom" data-color="000000" style="background: #000000;">
+							<div>
+							OPÇÕES AVANÇADAS
+							</div>
+							<input class="jscolor" readonly=“true” value="cc66ff" />
+						</div>
+					</li>
+
+					<div id="finalize-options">
+						<i class="material-icons back-btn">
+							arrow_back
+						</i>
+						<i class="material-icons done-btn">
+							favorite
+						</i>
+					</div>
+				</ul>
+				<ul class="colors owl-carousel" id="pocket-colors" style="display:none;">
+					<div class="colors-header">
+						BOLSO
+					</div>
+
+					<li>
+						<img class="color" data-texture="textura_padrao" src="models/obj/backpack/backpack/textura_padrao.png" alt="">
+					</li>
+					<li>
+						<img class="color" data-texture="textura_padrao" src="models/obj/backpack/backpack/textura_2.png" alt="">
+					</li>
+					<li>
+						<img class="color" data-texture="textura_padrao" src="models/obj/backpack/backpack/textura_3.png" alt="">
+					</li>
+					<li class="color-picker">	
+						<div class="custom" data-color="000000" style="background: #000000;">
+							<div>
+							OPÇÕES AVANÇADAS
+							</div>
+							<input class="jscolor" readonly=“true” value="cc66ff" />
+						</div>
+					</li>
+
+					<div id="finalize-options">
+						<i class="material-icons back-btn">
+							arrow_back
+						</i>
+						<i class="material-icons done-btn">
+							favorite
+						</i>
+					</div>
+				</ul>
+				<ul class="colors owl-carousel" id="sideways-colors" style="display:none;">
+					<div class="colors-header">
+						LATERAIS
+					</div>
+					
+
+					<li>
+						<div class="color black" data-color="efef9b" style="background: #efef9b;"></div>
+					</li>
+					<li>
+						<div class="color pink" data-color="feb2e2" style="background: #feb2e2;"></div>
+					</li>
+					<li>
+						<div class="color blue" data-color="1360ad" style="background: #1360ad;"></div>
+					</li>
+					<li class="color-picker">	
+						<div class="custom" data-color="000000" style="background: #000000;">
+							<div>
+							OPÇÕES AVANÇADAS
+							</div>
+							<input class="jscolor" readonly=“true” value="cc66ff" />
+						</div>
+					</li>
+
+					<div id="finalize-options">
+						<i class="material-icons back-btn">
+							arrow_back
+						</i>
+						<i class="material-icons done-btn">
+							favorite
+						</i>
+					</div>
+				</ul>
+				<ul class="colors owl-carousel" id="customizations-colors" style="display:none;">
+					
+					<div class="colors-header">
+						CUSTOMIZAÇÃO
+					</div>
+					
+					<li>
+						<div class="custom-name">
+							PERSONALIZE
+							<input type="text" maxlength="8">
+						</div>
+					</li>
+
+					<div id="finalize-options">
+						<i class="material-icons back-btn">
+							arrow_back
+						</i>
+						<i class="material-icons done-btn">
+							favorite
+						</i>
+					</div>
+				</ul>
+
+			</div>
+			<div id="dat">
+	
+			</div>
+			<div style="display:none" id="info">
+				<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - OBJLoader2 direct loader test
+				<div id="feedback"></div>
+			</div>
+		</div>
+
+		<script type="module">
+
+			document.querySelector(".custom-name input").oninput = function (event) {
+				var value = event.target.value
+				event.target.value = value.substring(0,8)
+			}
+			updateSlide()
+			function updateSlide() {
+				if(window.innerWidth <= 1100) {
+					document.querySelectorAll('.colors .colors-header').forEach(function (btn) {
+						btn.remove()
+					})
+					document.querySelectorAll('.colors #finalize-options').forEach(function (btn) {
+						btn.remove()
+					})
+
+					$(document).ready(function(){
+						$(".owl-carousel").owlCarousel({
+							responsiveClass:true,
+    					margin:0,
+							responsive:{
+								0:{
+										items:1,
+										nav: false
+								},
+								600:{
+										items:3,
+										nav:false
+								},
+								1000:{
+										items:5,
+										nav:true,
+										loop:false
+								}
+							}
+						});
+					});
+				}
+			}
+
+			window.onresize = function(event) {
+					if(window.innerWidth <= 1100) {
+						updateSlide()
+					} else {
+						var owl = $('.owl-carousel');
+						owl.trigger('destroy.owl.carousel');
+						owl.addClass('off');
+					}
+			};
+			var current_option_id = ''
+		
+			document.querySelector("#customizations #options").querySelectorAll("li").forEach(function (li) {
+				li.onclick = function (event) {
+					li = event.target.closest('li')
+					var to_id = li.dataset.to
+					document.querySelector("#options").style.display = 'none'
+					document.getElementById(to_id).style.display = ''
+
+					current_option_id = to_id
+					console.log(to_id)
+
+					if(window.innerWidth <= 1100) {
+						document.querySelector('.mobile-finalize-options').style.display = 'flex'
+					} 
+				}
+			})
+
+			document.querySelectorAll('.done-btn').forEach(function (btn) {
+				btn.onclick = function (e) {
+					var selectedColor = document.querySelector('.selected')
+					if(e.target.closest('ul').id == 'pocket-colors') {
+						selectedColor = selectedColor && selectedColor.style.backgroundColor
+						console.log(selectedColor)
+						// $.get( `/gocase_by_you?position=pocket&color=${selectedColor}&customization=color`, function( data ) {
+						// 	console.log('ajax response', data)
+						// });
+					}
+				}
+			})
+
+			document.querySelectorAll('.back-btn').forEach(function (btn) {
+				btn.onclick = function (event) {
+					if(window.innerWidth <= 1100) {
+						document.querySelector('.mobile-finalize-options').style.display = 'none'
+						document.querySelector("#options").style.display = 'block'
+						document.querySelectorAll(".colors").forEach(function (ul) {
+							ul.style.display = 'none'
+						})
+					} else {
+						event.target.closest('ul').style.display = 'none'
+						document.querySelector("#options").style.display = ''
+					}
+				}
+			})
+
+			document.querySelectorAll('.custom').forEach(function (btn) {
+				btn.onclick = function (event) {
+					var selectedColor = document.querySelector('.selected')
+
+					if(selectedColor) {
+						selectedColor.classList.remove('selected')
+					} {
+						event.target.classList.add('selected')
+					}
+				}
+			})
+
+			document.querySelectorAll('.color').forEach(function (btn) {
+				btn.onclick = function (event) {
+					var selectedColor = document.querySelector('.selected')
+
+					if(selectedColor) {
+						selectedColor.classList.remove('selected')
+					} {
+						event.target.classList.add('selected')
+					}
+				}
+			})
+
+			'use strict';
+
+			import * as THREE from '../build/three.module.js';
+
+			import { OrbitControls } from './jsm/controls/OrbitControls.js';
+
+			import { MTLLoader } from "./jsm/loaders/MTLLoader.js";
+			import { OBJLoader2 } from "./jsm/loaders/OBJLoader2.js";
+			import { MtlObjBridge } from "./jsm/loaders/obj2/bridge/MtlObjBridge.js";
+
+
+			const OBJLoader2Example = function ( elementToBindTo ) {
+				this.renderer = null;
+				this.canvas = elementToBindTo;
+				this.aspectRatio = 1;
+				this.recalcAspectRatio();
+
+				this.scene = null;
+				this.cameraDefaults = {
+					posCamera: new THREE.Vector3( 1000.0, 175.0, 500.0 ),
+					posCameraTarget: new THREE.Vector3( 0, 0, 0 ),
+					near: 0.1,
+					far: 10000,
+					fov: 460
+				};
+				this.camera = null;
+				this.cameraTarget = this.cameraDefaults.posCameraTarget;
+
+				this.controls = null;
+			};
+
+			OBJLoader2Example.prototype = {
+
+				constructor: OBJLoader2Example,
+
+				initGL: function () {
+					this.renderer = new THREE.WebGLRenderer( {
+						canvas: this.canvas,
+						antialias: true,
+						autoClear: true
+					} );
+					this.renderer.setClearColor( 0xf4f4f4);
+
+					this.scene = new THREE.Scene();
+
+					this.camera = new THREE.PerspectiveCamera( this.cameraDefaults.fov, this.aspectRatio, this.cameraDefaults.near, this.cameraDefaults.far );
+					this.resetCamera();
+					this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+					this.controls.minDistance = 400;
+					this.controls.maxDistance = 700;
+
+					let ambientLight = new THREE.AmbientLight( 0xa7c4fa );
+					let directionalLight1 = new THREE.DirectionalLight( 0xC0C090 );
+					let directionalLight2 = new THREE.DirectionalLight( 0xC0C090 );
+
+					directionalLight1.position.set( - 100, - 50, 100 );
+					directionalLight2.position.set( 100, 50, - 100 );
+
+					this.scene.add( directionalLight1 );
+					this.scene.add( directionalLight2 );
+					this.scene.add( ambientLight );
+
+				},
+
+				initContent: function () {
+					let modelName = 'backpack';
+					this._reportProgress( { detail: { text: 'Loading: ' + modelName } } );
+
+
+					let scope = this;
+					let objLoader2 = new OBJLoader2();
+					let callbackOnLoad = function ( object3d ) {
+						scope.scene.add( object3d );
+						scope._reportProgress( { detail: { text: '' } } );
+					};
+
+					let onLoadMtl = function ( mtlParseResult ) {
+						objLoader2.setModelName( modelName );
+						objLoader2.setLogging( true, true );
+						objLoader2.addMaterials( MtlObjBridge.addMaterialsFromMtlLoader( mtlParseResult ), true );
+						objLoader2.load( 'models/obj/backpack/backpack.obj', callbackOnLoad, null, null, null );
+					};
+					let mtlLoader = new MTLLoader();
+					mtlLoader.load( 'models/obj/backpack/backpack.mtl', onLoadMtl );
+				},
+
+				_reportProgress: function ( event ) {
+					let output = '';
+					if ( event.detail !== null && event.detail !== undefined && event.detail.text ) {
+
+						output = event.detail.text;
+
+					}
+					document.getElementById( 'feedback' ).innerHTML = output;
+				},
+
+				resizeDisplayGL: function () {
+					this.recalcAspectRatio();
+					this.renderer.setSize( this.canvas.offsetWidth, this.canvas.offsetHeight, false );
+
+					this.updateCamera();
+				},
+
+				recalcAspectRatio: function () {
+					this.aspectRatio = (this.canvas.offsetHeight === 0) ? 1 : this.canvas.offsetWidth / this.canvas.offsetHeight;
+				},
+
+				resetCamera: function () {
+					this.camera.position.copy( this.cameraDefaults.posCamera );
+					this.cameraTarget.copy( this.cameraDefaults.posCameraTarget );
+
+					this.updateCamera();
+				},
+
+				updateCamera: function () {
+					this.camera.aspect = this.aspectRatio;
+					this.camera.lookAt( this.cameraTarget );
+					this.camera.updateProjectionMatrix();
+				},
+
+				render: function () {
+					if ( !this.renderer.autoClear ) this.renderer.clear();
+					this.controls.autoRotate = true
+					this.controls.autoRotateSpeed = 1
+					this.controls.update();
+					this.renderer.render( this.scene, this.camera );
+				}
+			};
+
+			let app = new OBJLoader2Example( document.getElementById( 'example' ) );
+
+			let resizeWindow = function () {
+				app.resizeDisplayGL();
+			};
+
+			let render = function () {
+				requestAnimationFrame( render );
+				app.render();
+			};
+
+			window.addEventListener( 'resize', resizeWindow, false );
+
+			app.initGL();
+			app.resizeDisplayGL();
+			app.initContent();
+
+			render();
+		</script>
+	</body>
+</html>
